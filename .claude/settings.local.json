@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Users/habib/OneDrive/Desktop/Task Manager/\" status)",
+      "Bash(npm install *)",
+      "Bash(npx nest *)",
+      "Bash(git add *)"
+    ]
+  }
+}
