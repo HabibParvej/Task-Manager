@@ -4,7 +4,14 @@
       "Bash(git -C \"c:/Users/habib/OneDrive/Desktop/Task Manager/\" status)",
       "Bash(npm install *)",
       "Bash(npx nest *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(gh --version)",
+      "Bash(vercel --version)",
+      "Bash(vercel whoami *)",
+      "Bash(railway --version)",
+      "Bash(npm run *)"
     ]
   }
 }

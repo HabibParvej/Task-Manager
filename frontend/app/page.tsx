@@ -8,7 +8,8 @@ interface Task {
   createdAt: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000';
+// Relative path — works on localhost AND on Vercel without any env var
+const API = '/api/tasks';
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -22,12 +23,12 @@ export default function Home() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/tasks`);
+      const res = await fetch(API);
       if (!res.ok) throw new Error('Failed to fetch tasks');
       const data: Task[] = await res.json();
       setTasks(data);
     } catch {
-      setError('Could not load tasks. Is the backend running?');
+      setError('Could not load tasks. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -43,7 +44,7 @@ export default function Home() {
     try {
       setAdding(true);
       setError(null);
-      const res = await fetch(`${API_URL}/tasks`, {
+      const res = await fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title }),
@@ -63,7 +64,7 @@ export default function Home() {
     try {
       setDeletingId(id);
       setError(null);
-      const res = await fetch(`${API_URL}/tasks/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
       if (!res.ok && res.status !== 204) throw new Error('Failed to delete task');
       setTasks((prev) => prev.filter((t) => t.id !== id));
     } catch {
@@ -192,14 +193,7 @@ function Spinner({ className = 'w-4 h-4' }: { className?: string }) {
       fill="none"
       viewBox="0 0 24 24"
     >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
       <path
         className="opacity-75"
         fill="currentColor"
