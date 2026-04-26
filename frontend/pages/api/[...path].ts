@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express, { type Express } from 'express';
 import { AppModule } from '../../src/nest/app.module';
@@ -16,8 +17,9 @@ async function getApp(): Promise<Express> {
     logger: false,
   });
 
-  app.enableCors({ origin: '*', methods: ['GET', 'POST', 'DELETE'] });
+  app.enableCors({ origin: '*', methods: ['GET', 'POST', 'PATCH', 'DELETE'] });
   app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
   await app.init();
 
   cachedApp = server;
@@ -27,7 +29,6 @@ async function getApp(): Promise<Express> {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const app = await getApp();
-    // Express apps are Node.js http handlers — call directly without serverless-http
     app(req as any, res as any);
   } catch (err: any) {
     console.error('Handler error:', err);
