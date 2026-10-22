@@ -3,7 +3,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-
 ## Repository Overview
 
 Monorepo for a full-stack Task Manager. Two separate projects share the same git root:
@@ -12,6 +11,7 @@ Monorepo for a full-stack Task Manager. Two separate projects share the same git
 - **`/frontend`** — Next.js 15 app that is deployed to Vercel. Contains both the React UI and a NestJS serverless backend embedded via `pages/api/`.
 
 ## Commands
+
 
 ### Frontend (Next.js + embedded NestJS)
 ```bash
@@ -38,6 +38,7 @@ vercel --prod --yes
 ```
 
 ## Architecture
+
 
 ### Dual-mode NestJS
 
