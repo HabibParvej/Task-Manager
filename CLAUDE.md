@@ -6,8 +6,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Overview
 
 Monorepo for a full-stack Task Manager. Two separate projects share the same git root:
-
-
 - **`/backend`** — Standalone NestJS server (port 5000). Used for local development only; not deployed.
 - **`/frontend`** — Next.js 15 app that is deployed to Vercel. Contains both the React UI and a NestJS serverless backend embedded via `pages/api/`.
 
